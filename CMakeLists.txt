@@ -99,24 +99,11 @@ set(LLVM_EXAMPLES_BINARY_DIR ${LLVM_BINARY_DIR}/examples)
 set(LLVM_LIBDIR_SUFFIX "" CACHE STRING "Define suffix of library directory name (32/64)" )
 
 set(LLVM_ALL_TARGETS
-  AArch64
-  ARM
-  CppBackend
-  Hexagon
-  Mips
-  MSP430
-  NVPTX
-  PowerPC
-  R600
-  Sparc
-  SystemZ
   WDC65816
-  X86
-  XCore
   )
 
 # List of targets with JIT support:
-set(LLVM_TARGETS_WITH_JIT X86 PowerPC AArch64 ARM Mips SystemZ)
+set(LLVM_TARGETS_WITH_JIT )
 
 set(LLVM_TARGETS_TO_BUILD "all"
     CACHE STRING "Semicolon-separated list of targets to build, or \"all\".")
@@ -151,7 +138,7 @@ option(LLVM_ENABLE_FFI "Use libffi to call external functions from the interpret
 set(FFI_LIBRARY_DIR "" CACHE PATH "Additional directory, where CMake should search for libffi.so")
 set(FFI_INCLUDE_DIR "" CACHE PATH "Additional directory, where CMake should search for ffi.h or ffi/ffi.h")
 
-set(LLVM_TARGET_ARCH "host"
+set(LLVM_TARGET_ARCH "wdc65816"
   CACHE STRING "Set target to use for LLVM JIT or use \"host\" for automatic detection.")
 
 option(LLVM_ENABLE_TERMINFO "Use terminfo database if available." ON)
@@ -266,9 +253,8 @@ option (LLVM_ENABLE_DOXYGEN "Use doxygen to generate llvm documentation." OFF)
 # first cmake run
 include(config-ix)
 
-# By default, we target the host, but this can be overridden at CMake
-# invocation time.
-set(LLVM_DEFAULT_TARGET_TRIPLE "${LLVM_HOST_TRIPLE}" CACHE STRING
+# default to 816
+set(LLVM_DEFAULT_TARGET_TRIPLE "wdc65816" CACHE STRING
   "Default target for which LLVM will generate code." )
 set(TARGET_TRIPLE "${LLVM_DEFAULT_TARGET_TRIPLE}")
 
